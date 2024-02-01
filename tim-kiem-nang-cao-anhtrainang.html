@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tìm kiếm nâng cao
+    </title>
+    <style>
+        .post-search {
+          padding: 10px;
+          margin: 10px 0;
+          border-bottom: 1px solid #dddddd;
+        }
+        .thumnail-search {
+          float: left;
+          margin: 5px 20px 0 0;
+          width: 72px;
+          overflow: hidden;
+        }
+        .thumnail-search img {
+          height: 72px;
+          width: 72px;
+          border-radius: 5px;
+        }
+        .post-time-search {
+          float: left;
+          margin-right: 15px;
+          width: 220px;
+        }
+        .snipet-search {
+          float: left;
+          width: 340px;
+        }
+        .post-time-search h2 {
+          font-size: 15px;
+          line-height: 1.2em;
+          margin: 0 0 10px 0;
+          color: #12537f;
+          display: block;
+          font-weight: 700;
+          padding: 0;
+        }
+        .search-options {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 20px;
+        }
+        .container select option {
+            min-height: 1.4em;
+            font-weight: 500;
+        }  
+          
+        .filter-label, .search-keyword, .sort-order {
+          flex: 1;
+        }
+        .search-keyword .inputsearch {
+          width: 100%;height: 40px;
+        }
+        .container select,.container input {
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 0;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: 500;
+            outline: 0;
+            color: #333;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        .container select {
+            text-transform: none;
+        }
+        .kq-search {
+          font-size: 15px;
+        }
+        #search-result {
+          margin-top: 20px;
+        }
+        a.close {
+          float: right;
+          font-size: 30px;
+          font-weight: bold;
+          color: #ca252b;
+        }
+        .post .category, .comments {
+          display: none;
+        }
+          
+        #label-select::-webkit-scrollbar {
+            width: 5px;
+            background-color: #fff; 
+        }
+        
+        #label-select::-webkit-scrollbar-thumb {
+            border-radius: 10px; 
+        }
+        
+        #label-select::-webkit-scrollbar-thumb:hover {
+            background-color: #ddd; 
+        }
+    </style>
+</head>
+
+<body>
+    <div class="search-container">
+        <div class="search-options">
+            <div class="filter-label">
+                Lọc theo nhãn
+                <select id="label-select">
+                <option value="">Chọn nhãn</option>
+            </select>
+            </div>
+            <div class="search-keyword">
+                Tìm bài viết với từ khóa
+                <form action="/search" id="ajax-search-form">
+                    <input aria-label="Tìm kiếm trong blog này" autocomplete="off" class="inputsearch left text" id="search-input-blogspotvn" name="q" type="text" value="" />
+                </form>
+            </div>
+            <div class="sort-order">
+                Sắp xếp theo:
+                <select id="sort-order">
+                <option value="newest">Mới nhất</option>
+                <option value="oldest">Cũ nhất</option>
+            </select>
+            </div>
+        </div>
+    </div>
+    <div id="search-result"></div>
+
+    <script>
+        $(document).ready(function() {
+            function loadLabels() {
+                $.ajax({
+                    url: 'https://draft.blogger.com/feeds/6559673834448164670/posts/summary?alt=json-in-script&max-results=500',
+                    type: 'get',
+                    dataType: 'jsonp',
+                    success: function(json) {
+                        var categories = json.feed.category;
+                        if (categories) {
+                            var $labelSelect = $('#label-select');
+                            categories.forEach(function(category) {
+                                $labelSelect.append($('<option></option>').val(category.term).text(category.term));
+                            });
+    
+                            $labelSelect.change(function() {
+                                performSearch();
+                            });
+                        }
+                    },
+                    error: function() {
+                        console.log('Error loading labels');
+                    }
+                });
+            }
+    
+            loadLabels();
+    
+            var $form = $('#ajax-search-form'),
+                $input = $form.find(':text'),
+                $labelSelect = $('#label-select');
+    
+            var $result_container = $('#search-result');
+    
+            $input.on("input", function() {
+                performSearch();
+            });
+    
+            $('#sort-order').change(function() {
+                performSearch();
+            });
+    
+            function performSearch() {
+                var keyword = $input.val().trim();
+                var selectedLabel = $labelSelect.val();
+                var sortOption = $('#sort-order').val();
+                if (!selectedLabel && !keyword) {
+                    $result_container.html('');
+                    return;
+                }
+    
+                var searchURL = 'https://draft.blogger.com/feeds/6559673834448164670/posts/summary?alt=json-in-script&max-results=500';
+                if (selectedLabel && selectedLabel !== "") {
+                    searchURL += '&q=';
+                    searchURL += 'label:"' + selectedLabel + '"';
+                    if (keyword !== "") {
+                        searchURL += ' ' + encodeURIComponent(keyword);
+                    }
+                } else if (keyword !== "") {
+                    searchURL += '&q=' + encodeURIComponent(keyword);
+                }
+    
+                $result_container.show().html('Loading...');
+    
+                $.ajax({
+                    url: searchURL,
+                    type: 'get',
+                    dataType: 'jsonp',
+                    success: function(json) {
+                        var entry = json.feed.entry,
+                            link, skeleton = "";
+                        if (typeof entry !== "undefined" && entry.length > 0) {
+                            if (sortOption === 'newest') {
+                                entry.sort(function(a, b) {
+                                    return new Date(b.published.$t) - new Date(a.published.$t);
+                                });
+                            } else if (sortOption === 'oldest') {
+                                entry.sort(function(a, b) {
+                                    return new Date(a.published.$t) - new Date(b.published.$t);
+                                });
+                            }
+                            skeleton = '<div class="kq-search">Kết quả tìm kiếm';
+                            if (keyword !== "") {
+                                skeleton += ' cho từ khoá <span class="red">&#8220;' + keyword + '&#8221;</span>';
+                            }
+                            if (selectedLabel && selectedLabel !== "") {
+                                skeleton += ' tại nhãn <span class="red">"' + selectedLabel + '"</span>';
+                            }
+                            skeleton += ' (' + entry.length + ' kết quả)<a class="close" href="javascript:void(0);">&#215;</a></div><div>';
+                            for (var i = 0; i < entry.length; i++) {
+                                for (var j = 0; j < entry[i].link.length; j++) {
+                                    if (entry[i].link[j].rel == "alternate") {
+                                        link = entry[i].link[j].href;
+                                    }
+                                }
+                                var title = entry[i].title.$t;
+                                var publishedDate = entry[i].published.$t.split('T')[0];
+                                var formattedDate = formatDate(publishedDate);
+                                var snippet = entry[i].summary.$t.substring(0, 150) + '...';
+                                var thumbnailUrl = entry[i].media$thumbnail ? entry[i].media$thumbnail.url : '';
+    
+                                skeleton += '<div class="post-search">';
+                                skeleton += '<div class="thumnail-search"><img src="' + thumbnailUrl + '" alt="' + title + '"></div>';
+                                skeleton += '<div class="post-time-search"><h2 class="post-title-search"><a target="_blank" href="' + link + '">' + title + '</a></h2>';
+                                if (formattedDate) {
+                                    skeleton += '<div class="time-post-search">' + formattedDate + '</div></div>';
+                                }
+                                if (snippet) {
+                                    skeleton += '<div class="snipet-search">' + snippet + '</div>';
+                                }
+                                skeleton += '<div style="clear: both;"></div></div>';
+                            }
+                            skeleton += '</div>';
+                            $result_container.html(skeleton);
+                        } else {
+                            $result_container.html(''); 
+                        }
+                    },
+                    error: function() {
+                        $result_container.html('<div class="kq-search">Kết quả tìm kiếm<a class="close" href="javascript:void(0);">&#215;</a></div><strong>Lỗi khi tải dữ liệu.</strong>');
+                    }
+                });
+            }
+    
+            $form.on("submit", function(event) {
+                event.preventDefault();
+            });
+    
+            $result_container.on("click", ".close", function() {
+                $input.val(''); 
+                $labelSelect.val(''); 
+                $result_container.html(''); 
+                $result_container.hide(); 
+                return false;
+            });
+    
+            function formatDate(inputDate) {
+                var date = new Date(inputDate);
+                var day = date.getDate();
+                var month = date.getMonth() + 1;
+                var year = date.getFullYear().toString().slice(-2);
+                if (day < 10) {
+                    day = '0' + day;
+                }
+                if (month < 10) {
+                    month = '0' + month;
+                }
+    
+                return day + '.' + month + '.' + year;
+            }
+        });
+    </script>
+</body>
+
+</html>
