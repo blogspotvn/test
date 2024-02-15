@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>So sánh khi sử dụng px với % trong CSS</title>
+    <style>
+body{
+    background-color:#ffd;
+    font:normal normal 13px/1.4 Arial,Sans-Serif;
+    color:#000;
+    text-align:center;
+    padding:50px 0
+}
+div{
+    padding-top:1em
+}
+h2{
+    font-weight:700;
+    line-height:normal;
+    font-size:300%
+}
+p{
+    margin:0 auto 1em;
+    width:500px
+}
+.col-group{
+    background-color:#800;
+    margin:0 auto 50px;
+    text-align:left
+}
+.col-group input{
+    display:block;
+    margin:0 0 50px;
+    padding:0;
+    border:0;
+    outline:0;
+    width:100%;
+    font:inherit;
+    font-weight:700;
+    background:0 0;
+    color:#fff;
+    text-align:center
+}
+.col-group input[disabled]{
+    opacity:.4
+}
+.left-col{
+    float:left;
+    height:200px;
+    background-color:#600
+}
+.right-col{
+    float:right;
+    height:200px;
+    overflow:hidden;
+    background-color:#700
+}
+.split-side{
+    float:left;
+    height:120px;
+    background-color:#a00
+}
+.split-side.even{
+    background-color:#b00
+}
+.col-bot{
+    float:left;
+    height:100px;
+    background-color:#500
+}
+.col-bot.odd{
+    background-color:#400
+}
+.clear{
+    padding-top:0;
+    clear:both
+}
+ 
+    </style>
+</head>
+
+<body>
+    <h2>Sử dụng px</h2>
+    <p>Sử dụng px khi cập nhật chiều rộng của cột chính phải tính toán từng phần trong nó</p>
+    <div class="col-group" style="width:500px;"><input type="text" value="500px" onkeyup="this.parentNode.style.width=this.value;">
+        <div class="left-col" style="width:300px;"><input type="text" value="300px" onkeyup="this.parentNode.style.width=this.value;"></div>
+        <div class="right-col" style="width:200px;"><input type="text" value="200px" onkeyup="this.parentNode.style.width=this.value;">
+            <div class="split-side odd" style="width:100px;"><input type="text" value="100px" onkeyup="this.parentNode.style.width=this.value;"></div>
+            <div class="split-side even" style="width:100px;"><input type="text" value="100px" onkeyup="this.parentNode.style.width=this.value;"></div>
+        </div>
+        <div class="footer clear">
+            <div class="col-bot odd" style="width:125px;"><input type="text" value="125px" onkeyup="this.parentNode.style.width=this.value;"></div>
+            <div class="col-bot even" style="width:125px;"><input type="text" value="125px" onkeyup="this.parentNode.style.width=this.value;"></div>
+            <div class="col-bot odd" style="width:125px;"><input type="text" value="125px" onkeyup="this.parentNode.style.width=this.value;"></div>
+            <div class="col-bot even" style="width:125px;"><input type="text" value="125px" onkeyup="this.parentNode.style.width=this.value;"></div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <h2>Sử dụng đơn vị %</h2>
+    <p>Mỗi khi cập nhật bạn chỉ việc thay đổi chiều rộng cột chính, từng phần theo thay đổi theo tỷ lệ % ban đầu</p>
+    <div class="col-group" style="width:500px;"><input type="text" value="500px" onkeyup="this.parentNode.style.width=this.value;">
+        <div class="left-col" style="width:60%;"><input type="text" value="60%" onkeyup="this.parentNode.style.width=this.value;" disabled></div>
+        <div class="right-col" style="width:40%;"><input type="text" value="40%" onkeyup="this.parentNode.style.width=this.value;" disabled>
+            <div class="split-side odd" style="width:50%;"><input type="text" value="50%" onkeyup="this.parentNode.style.width=this.value;" disabled></div>
+            <div class="split-side even" style="width:50%;"><input type="text" value="50%" onkeyup="this.parentNode.style.width=this.value;" disabled></div>
+        </div>
+        <div class="footer clear">
+            <div class="col-bot odd" style="width:25%;"><input type="text" value="25%" onkeyup="this.parentNode.style.width=this.value;" disabled></div>
+            <div class="col-bot even" style="width:25%;"><input type="text" value="25%" onkeyup="this.parentNode.style.width=this.value;" disabled></div>
+            <div class="col-bot odd" style="width:25%;"><input type="text" value="25%" onkeyup="this.parentNode.style.width=this.value;" disabled></div>
+            <div class="col-bot even" style="width:25%;"><input type="text" value="25%" onkeyup="this.parentNode.style.width=this.value;" disabled></div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</body>
+
+</html>
