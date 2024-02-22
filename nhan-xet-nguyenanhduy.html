@@ -1,0 +1,142 @@
+<div id="rcp">
+    <div class="_rcp"></div>
+    <div class="_rcp-more"><a class="rcp-load button">Xem thêm</a>
+        <div class="loader" style="display:none;"></div>
+    </div>
+</div>
+<script>
+//<![CDATA[
+var postsInfo = {};
+var _countC = 0, _totalC = 0;
+var adminId = "00200836249754333711";
+
+function recentpostslist(json) {
+    for (var i = 0; i < json.feed.entry.length; i++) {
+        var entry = json.feed.entry[i];
+        var entryUrl = entry.link[entry.link.length - 1].href.split('?')[0];
+        var entryTitle = entry.title.$t;
+        postsInfo[entryUrl] = entryTitle;
+    }
+    loadComments();
+}
+
+function loadComments() {
+    $.ajax({
+        url: "/feeds/comments/summary?alt=json-in-script&max-results=5&start-index=" + (_countC + 1),
+        type: "get",
+        dataType: "jsonp",
+        success: function(e) {
+            _totalC = e.feed.openSearch$totalResults.$t;
+            _countC += e.feed.entry.length;
+
+            for (var a = 0; a < e.feed.entry.length; a++) {
+                var entry = e.feed.entry[a];
+                var commentLink = "";
+                for (var t = 0; t < entry.link.length; t++) {
+                    if (entry.link[t].rel === "alternate") {
+                        commentLink = entry.link[t].href;
+                        break;
+                    }
+                }
+                var postUrl = commentLink.split('?')[0];
+                var postTitleHtml = postsInfo[postUrl] ? ' nhận xét trong <a href="' + postUrl + '">' + postsInfo[postUrl] + '</a>' : '';
+                var authorPic = entry.author[0].gd$image.src.replace(/\/s\d+(\-c)?/, "/s48-c");
+                var authorProfileLink = entry.author[0].uri ? entry.author[0].uri.$t : "javascript:void(0);";
+                var authorName = entry.author[0].name.$t;
+                var commentSnippet = entry.summary.$t.replace(/(<([^>]+)>)/gi, "").substring(0, 20) + '...';
+                var isAdminComment = entry.author[0].uri && entry.author[0].uri.$t.includes(adminId);
+                var adminClass = isAdminComment ? ' admin' : '';
+
+                var commentHtml = '<div class="rcp-content' + adminClass + '"><div class="rcp-img"><img src="' + authorPic + '" /></div><div class="rcp-main"><span class="rcp-user"><a target="_blank" href="' + authorProfileLink + '">' + authorName + '</a>' + postTitleHtml + '</span><div class="rcp-summary" title="' + commentSnippet + '"><a target="_blank" href="' + commentLink + '">' + commentSnippet + '...</i></a></div></div></div>';
+                $("._rcp").append(commentHtml);
+            }
+
+            if (_countC < _totalC) {
+                $(".rcp-load").show();
+            } else {
+                $(".rcp-load").html("Hết nhận xét!").off('click');
+            }
+        }
+    });
+}
+
+$(function() {
+    $.ajax({
+        url: 'https://draft.blogger.com/feeds/2003614778934520771/posts/default?alt=json-in-script&max-results=500',
+        type: 'get',
+        dataType: 'jsonp',
+        success: recentpostslist
+    });
+
+    $(".rcp-load").on("click", function(e) {
+        e.preventDefault();
+        $("._rcp-more .loader").show();
+        $(this).hide();
+        loadComments();
+    });
+});
+//]]>
+</script>
+<style>
+    #rcp {
+        font-family: Arial, sans-serif;
+        max-width: 500px;
+        margin: auto;
+        background-color: #f2f3f5;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .rcp-content {
+        background-color: #fff;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 18px;
+        border: 1px solid #ddd;
+    }
+
+    /* Bình luận của admin */
+    .rcp-content.admin {
+        background-color: #d4e6f1;
+    }
+
+    .rcp-main {
+        margin-left: 60px; 
+    }
+
+    .rcp-img {
+        float: left;
+        width: 50px; 
+    }
+
+    .rcp-img img {
+        border-radius: 50%;
+        width: 100%;
+    }
+
+    .rcp-user {
+        font-weight: bold;
+        color: #365899;
+    }
+
+    .rcp-summary {
+        color: #444;
+        font-size: 14px;
+    }
+
+    .rcp-load.button {
+        display: block;
+        text-align: center;
+        padding: 8px 15px;
+        background-color: #365899;
+        color: white;
+        border-radius: 4px;
+        margin: 10px auto;
+        text-decoration: none;
+    }
+
+    .rcp-load.button:hover {
+        background-color: #314c7e;
+    }
+</style>
