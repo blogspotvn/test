@@ -1,152 +1,144 @@
 <script src="https://tool.blogspotvn.net/js/jquery.min.js"></script>
 
-
-
-
-
-
-<h1>Nhận Xét</h1>
-<div class="loader"></div>
 <div id="rcp">
     <div class="_rcp"></div>
-    <div class="_rcp-more">
-        <span class="rcp-load button" style="display:none;">Xem thêm</span>
+    <div class="_rcp-more"><a class="rcp-load button">Xem thêm</a>
+        <div class="loader" style="display:none;"></div>
     </div>
 </div>
 <script>
 //<![CDATA[
-var _blogspotvn=["\x31\x37\x39\x34\x34\x34\x33\x31\x34\x36\x32\x38\x36\x32\x35\x32\x33\x32\x32\x38","\x20\x6E\u0103\x6D\x20\x74\x72\u01B0\u1EDB\x63","\x20\x74\x68\xE1\x6E\x67\x20\x74\x72\u01B0\u1EDB\x63","\x20\x6E\x67\xE0\x79\x20\x74\x72\u01B0\u1EDB\x63","\x20\x67\x69\u1EDD\x20\x74\x72\u01B0\u1EDB\x63","\x20\x70\x68\xFA\x74\x20\x74\x72\u01B0\u1EDB\x63","\x20\x67\x69\xE2\x79\x20\x74\x72\u01B0\u1EDB\x63","\x3F","\x2E\x6C\x6F\x61\x64\x65\x72","\x2F\x66\x65\x65\x64\x73\x2F\x63\x6F\x6D\x6D\x65\x6E\x74\x73\x2F\x73\x75\x6D\x6D\x61\x72\x79\x3F\x61\x6C\x74\x3D\x6A\x73\x6F\x6E\x2D\x69\x6E\x2D\x73\x63\x72\x69\x70\x74\x26\x6D\x61\x78\x2D\x72\x65\x73\x75\x6C\x74\x73\x3D\x31\x30\x26\x73\x74\x61\x72\x74\x2D\x69\x6E\x64\x65\x78\x3D","\x67\x65\x74","\x6A\x73\x6F\x6E\x70","","\x61\x6C\x74\x65\x72\x6E\x61\x74\x65","\x20\x6E\x68\u1EAD\x6E\x20\x78\xE9\x74\x20\x74\x72\x6F\x6E\x67\x20\x3C\x61\x20\x68\x72\x65\x66\x3D\x22","\x22\x3E","\x3C\x2F\x61\x3E","\x2F\x73\x34\x38\x2D\x63","\x6A\x61\x76\x61\x73\x63\x72\x69\x70\x74\x3A\x76\x6F\x69\x64\x28\x30\x29\x3B","\x2E\x2E\x2E","\x20\x61\x64\x6D\x69\x6E","\x3C\x64\x69\x76\x20\x63\x6C\x61\x73\x73\x3D\x22\x72\x63\x70\x2D\x63\x6F\x6E\x74\x65\x6E\x74","\x22\x3E\x3C\x64\x69\x76\x20\x63\x6C\x61\x73\x73\x3D\x22\x72\x63\x70\x2D\x69\x6D\x67\x22\x3E\x3C\x69\x6D\x67\x20\x61\x6C\x74\x3D\x22","\x22\x20\x73\x72\x63\x3D\x22","\x22\x20\x2F\x3E\x3C\x2F\x64\x69\x76\x3E\x3C\x64\x69\x76\x20\x63\x6C\x61\x73\x73\x3D\x22\x72\x63\x70\x2D\x6D\x61\x69\x6E\x22\x3E\x3C\x73\x70\x61\x6E\x20\x63\x6C\x61\x73\x73\x3D\x22\x72\x63\x70\x2D\x75\x73\x65\x72\x22\x3E\x3C\x61\x20\x74\x61\x72\x67\x65\x74\x3D\x22\x5F\x62\x6C\x61\x6E\x6B\x22\x20\x68\x72\x65\x66\x3D\x22","\x3C\x2F\x73\x70\x61\x6E\x3E\x3C\x64\x69\x76\x20\x63\x6C\x61\x73\x73\x3D\x22\x72\x63\x70\x2D\x73\x75\x6D\x6D\x61\x72\x79\x22\x20\x74\x69\x74\x6C\x65\x3D\x22","\x22\x3E\x3C\x61\x20\x74\x61\x72\x67\x65\x74\x3D\x22\x5F\x62\x6C\x61\x6E\x6B\x22\x20\x68\x72\x65\x66\x3D\x22","\x20\x3C\x69\x20\x63\x6C\x61\x73\x73\x3D\x22\x73\x6E\x69\x70\x70\x65\x74\x2D\x66\x61\x64\x65\x22\x3E\x2E\x2E\x2E\x3C\x2F\x69\x3E\x3C\x2F\x61\x3E\x3C\x2F\x64\x69\x76\x3E\x3C\x64\x69\x76\x20\x63\x6C\x61\x73\x73\x3D\x22\x74\x69\x6D\x65\x63\x6D\x74\x22\x3E","\x3C\x2F\x64\x69\x76\x3E\x3C\x2F\x64\x69\x76\x3E\x3C\x2F\x64\x69\x76\x3E","\x2E\x5F\x72\x63\x70","\x2E\x72\x63\x70\x2D\x6C\x6F\x61\x64","\x63\x6C\x69\x63\x6B","\x48\u1EBF\x74\x20\x6E\x68\u1EAD\x6E\x20\x78\xE9\x74\x21","\x68\x74\x74\x70\x73\x3A\x2F\x2F\x64\x72\x61\x66\x74\x2E\x62\x6C\x6F\x67\x67\x65\x72\x2E\x63\x6F\x6D\x2F\x66\x65\x65\x64\x73\x2F\x34\x37\x33\x39\x33\x35\x37\x33\x33\x38\x39\x35\x37\x33\x37\x37\x37\x30\x37\x2F\x70\x6F\x73\x74\x73\x2F\x64\x65\x66\x61\x75\x6C\x74\x3F\x61\x6C\x74\x3D\x6A\x73\x6F\x6E\x2D\x69\x6E\x2D\x73\x63\x72\x69\x70\x74\x26\x6D\x61\x78\x2D\x72\x65\x73\x75\x6C\x74\x73\x3D\x35\x30\x30"];var postsInfo={};var _countC=0,_totalC=0;var adminId=_blogspotvn[0];function timeSince(date){var seconds=Math.floor(( new Date()-  new Date(date))/ 1000);var interval=seconds/ 31536000;if(interval> 1){return Math.floor(interval)+ _blogspotvn[1]};interval= seconds/ 2592000;if(interval> 1){return Math.floor(interval)+ _blogspotvn[2]};interval= seconds/ 86400;if(interval> 1){return Math.floor(interval)+ _blogspotvn[3]};interval= seconds/ 3600;if(interval> 1){return Math.floor(interval)+ _blogspotvn[4]};interval= seconds/ 60;if(interval> 1){return Math.floor(interval)+ _blogspotvn[5]};return Math.floor(seconds)+ _blogspotvn[6]}function recentpostslist(json){for(var i=0;i< json.feed.entry.length;i++){var entry=json.feed.entry[i];var entryUrl=entry.link[entry.link.length- 1].href.split(_blogspotvn[7])[0];var entryTitle=entry.title.$t;postsInfo[entryUrl]= entryTitle};loadComments()}function loadComments(){$(_blogspotvn[8]).show();$.ajax({url:_blogspotvn[9]+ (_countC+ 1),type:_blogspotvn[10],dataType:_blogspotvn[11],success:function(e){_totalC= e.feed.openSearch$totalResults.$t;_countC+= e.feed.entry.length;for(var a=0;a< e.feed.entry.length;a++){var entry=e.feed.entry[a];var commentLink=_blogspotvn[12];for(var t=0;t< entry.link.length;t++){if(entry.link[t].rel=== _blogspotvn[13]){commentLink= entry.link[t].href;break}};var postUrl=commentLink.split(_blogspotvn[7])[0];var postTitleHtml=postsInfo[postUrl]?_blogspotvn[14]+ postUrl+ _blogspotvn[15]+ postsInfo[postUrl]+ _blogspotvn[16]:_blogspotvn[12];var authorPic=entry.author[0].gd$image.src.replace(/\/s\d+(\-c)?/,_blogspotvn[17]);var authorProfileLink=entry.author[0].uri?entry.author[0].uri.$t:_blogspotvn[18];var authorName=entry.author[0].name.$t;var commentSnippet=entry.summary.$t.replace(/(<([^>]+)>)/gi,_blogspotvn[12]).substring(0,150)+ _blogspotvn[19];var commentDate=timeSince(entry.published.$t);var isAdminComment=entry.author[0].uri&& entry.author[0].uri.$t.includes(adminId);var adminClass=isAdminComment?_blogspotvn[20]:_blogspotvn[12];var commentHtml=_blogspotvn[21]+ adminClass+ _blogspotvn[22]+ authorName+ _blogspotvn[23]+ authorPic+ _blogspotvn[24]+ authorProfileLink+ _blogspotvn[15]+ authorName+ _blogspotvn[16]+ postTitleHtml+ _blogspotvn[25]+ commentSnippet+ _blogspotvn[26]+ commentLink+ _blogspotvn[15]+ commentSnippet+ _blogspotvn[27]+ commentDate+ _blogspotvn[28];$(_blogspotvn[29]).append(commentHtml)};$(_blogspotvn[8]).hide();if(_countC< _totalC){$(_blogspotvn[30]).show()}else {$(_blogspotvn[30]).html(_blogspotvn[32]).off(_blogspotvn[31])}}})}$(function(){$.ajax({url:_blogspotvn[33],type:_blogspotvn[10],dataType:_blogspotvn[11],success:recentpostslist});$(_blogspotvn[30]).on(_blogspotvn[31],function(e){e.preventDefault();$(_blogspotvn[8]).show();$(this).hide();loadComments()})})
+var postsInfo = {};
+var _countC = 0, _totalC = 0;
+var adminId = "17944431462862523228";
+
+function recentpostslist(json) {
+    for (var i = 0; i < json.feed.entry.length; i++) {
+        var entry = json.feed.entry[i];
+        var entryUrl = entry.link[entry.link.length - 1].href.split('?')[0];
+        var entryTitle = entry.title.$t;
+        postsInfo[entryUrl] = entryTitle;
+    }
+    loadComments();
+}
+
+function loadComments() {
+    $.ajax({
+        url: "https://www.blogspotvn.net/feeds/comments/summary?alt=json-in-script&max-results=5&start-index=" + (_countC + 1),
+        type: "get",
+        dataType: "jsonp",
+        success: function(e) {
+            _totalC = e.feed.openSearch$totalResults.$t;
+            _countC += e.feed.entry.length;
+
+            for (var a = 0; a < e.feed.entry.length; a++) {
+                var entry = e.feed.entry[a];
+                var commentLink = "";
+                for (var t = 0; t < entry.link.length; t++) {
+                    if (entry.link[t].rel === "alternate") {
+                        commentLink = entry.link[t].href;
+                        break;
+                    }
+                }
+                var postUrl = commentLink.split('?')[0];
+                var postTitleHtml = postsInfo[postUrl] ? ' nhận xét trong <a href="' + postUrl + '">' + postsInfo[postUrl] + '</a>' : '';
+                var authorPic = entry.author[0].gd$image.src.replace(/\/s\d+(\-c)?/, "/s48-c");
+                var authorProfileLink = entry.author[0].uri ? entry.author[0].uri.$t : "javascript:void(0);";
+                var authorName = entry.author[0].name.$t;
+                var commentSnippet = entry.summary.$t.replace(/(<([^>]+)>)/gi, "").substring(0, 20) + '...';
+                var isAdminComment = entry.author[0].uri && entry.author[0].uri.$t.includes(adminId);
+                var adminClass = isAdminComment ? ' admin' : '';
+
+                var commentHtml = '<div class="rcp-content' + adminClass + '"><div class="rcp-img"><img src="' + authorPic + '" /></div><div class="rcp-main"><span class="rcp-user"><a target="_blank" href="' + authorProfileLink + '">' + authorName + '</a>' + postTitleHtml + '</span><div class="rcp-summary" title="' + commentSnippet + '"><a target="_blank" href="' + commentLink + '">' + commentSnippet + '...</i></a></div></div></div>';
+                $("._rcp").append(commentHtml);
+            }
+
+            if (_countC < _totalC) {
+                $(".rcp-load").show();
+            } else {
+                $(".rcp-load").html("Hết nhận xét!").off('click');
+            }
+        }
+    });
+}
+
+$(function() {
+    $.ajax({
+        url: 'https://draft.blogger.com/feeds/4739357338957377707/posts/default?alt=json-in-script&max-results=500',
+        type: 'get',
+        dataType: 'jsonp',
+        success: recentpostslist
+    });
+
+    $(".rcp-load").on("click", function(e) {
+        e.preventDefault();
+        $("._rcp-more .loader").show();
+        $(this).hide();
+        loadComments();
+    });
+});
 //]]>
 </script>
-
 <style>
-h1, h2 {
-  font-size: xxx-large !important;
-  text-align: center !important;
-}
-#rcp{
-    max-width: 700px;
-    margin: auto;
-}  
-  
-._rcp, #main-wrapper {
-  width: calc(100% - 2px);
-}
-.rcp-content {
-  margin: 25px 0;
-  padding: 0;
-  width: 100%;
-  position: relative;
-}
-.rcp-img, .rcp-img img {
-  width: 48px;
-  height: 48px;
-  float: left;
-  margin-right: 10px;
-  border-radius: 50%;
-}
-.rcp-main {
-  border: 1px solid #adadad;
-  padding: 10px;
-  overflow: hidden;
-  border-radius: 5px;
-}
-.dark .rcp-main {
-  background: #6a6a6a;
-  color: #cbcbcb;
-}
-.rcp-user a {
-  font-weight: 700;
-  text-decoration: none;
-}
-.dark .rcp-summary a {
-  color: #eeeeee !important;
-}
-.rcp-summary a {
-  color: #333333 !important;
-}
-._rcp-more .loader {
-  display: none;
-}
-._rcp-more {
-  margin: 20px 0;
-  text-align: center;
-}
-#sidebar-wrapper, #comments {
-  display: none;
-}
-.dark .snippet-fade {
-  background: -webkit-linear-gradient(to left, #262626 0, #262626 20%, rgba(38, 38, 38, 0) 100%) !important;
-  background: linear-gradient(to left, #6a6a6a 0, #6a6a6a 20%, rgba(38, 38, 38, 0) 100%) !important;
-}
-.rcp-summary {
-  padding: 10px 0;
-}
-.rcp-user:after {
-  content: "";
-  position: absolute;
-  top: 20px;
-  width: 0;
-  height: 0;
-  line-height: 0;
-  left: 49px;
-  border-top: 10px solid #adadad;
-  border-left: 10px solid transparent;
-}
-.admin .rcp-user:after {
-  border-top: 10px solid #97bcb7;
-}
-.admin .rcp-main {
-  border: 1px solid #005b5354;
-  background: #005b401f;
-}
-.admin .snippet-fade {
-  background: -webkit-linear-gradient(to left, #e0ebe8 0, #e0ebe8 20%, rgb(224 235 232 / 11%) 100%);
-  background: linear-gradient(to left, #e0ebe8 0, #e0ebe8 20%, rgb(224 235 232 / 11%) 100%);
-}
-.dark .admin .snippet-fade {
-  background: -webkit-linear-gradient(to left, #212c29 0, #212c29 20%, rgb(33 44 41 / 9%) 100%) !important;
-  background: linear-gradient(to left, #212c29 0, #212c29 20%, rgb(33 44 41 / 9%) 100%) !important;
-}
-.dark .admin .rcp-user:after {
-  border-top: 10px solid #163b36;
-}
-.timecmt {
-  float: right;
-  font-style: italic;
-  font-weight: bold;
-  font-size: smaller;
-}
-.loader, .loader1 {
-  border: 5px solid #f3f3f3;
-  border-top: 5px solid #005b53;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  animation: spin 1s linear infinite;
-  margin: 0 auto;
-}
+    #rcp {
+        font-family: Arial, sans-serif;
+        max-width: 500px;
+        margin: auto;
+        background-color: #f2f3f5;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-} 
-  
+    .rcp-content {
+        background-color: #fff;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 18px;
+        border: 1px solid #ddd;
+    }
 
-@media (max-width:1095px){
-  #myChart{width:555px!important}
-  .admin .rcp-img,.admin .rcp-img img {
-    float: right;
-    margin-left: 10px;margin-right: 0px;
-}
- .admin .rcp-user:after {
-    right: 48px;left: auto;
-    border-top: 10px solid #97bcb7;
-    border-right: 10px solid transparent;border-left: 0;
-}
-}  
-  
-  
-@media (max-width:768px){.bieudo{display:block!important}#myChart{height:auto!important;width:100%!important}#commentersList img{height:30px!important;width:30px!important}#commentersList{margin-top:0px!important}#myChartContainer{text-align:center}  
-}  
+    /* Bình luận của admin */
+    .rcp-content.admin {
+        background-color: #d4e6f1;
+    }
+
+    .rcp-main {
+        margin-left: 60px; 
+    }
+
+    .rcp-img {
+        float: left;
+        width: 50px; 
+    }
+
+    .rcp-img img {
+        border-radius: 50%;
+        width: 100%;
+    }
+
+    .rcp-user {
+        font-weight: bold;
+        color: #365899;
+    }
+
+    .rcp-summary {
+        color: #444;
+        font-size: 14px;
+    }
+
+    .rcp-load.button {
+        display: block;
+        text-align: center;
+        padding: 8px 15px;
+        background-color: #365899;
+        color: white;
+        border-radius: 4px;
+        margin: 10px auto;
+        text-decoration: none;
+    }
+
+    .rcp-load.button:hover {
+        background-color: #314c7e;
+    }
 </style>
