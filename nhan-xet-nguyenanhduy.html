@@ -9,7 +9,7 @@
 //<![CDATA[
 var postsInfo = {};
 var _countC = 0, _totalC = 0;
-var adminId = "17944431462862523228";
+var adminId = "00200836249754333711";
 
 function recentpostslist(json) {
     for (var i = 0; i < json.feed.entry.length; i++) {
@@ -63,7 +63,7 @@ function loadComments() {
 
 $(function() {
     $.ajax({
-        url: 'https://draft.blogger.com/feeds/4739357338957377707/posts/default?alt=json-in-script&max-results=500',
+        url: 'https://draft.blogger.com/feeds/2003614778934520771/posts/default?alt=json-in-script&max-results=500',
         type: 'get',
         dataType: 'jsonp',
         success: recentpostslist
