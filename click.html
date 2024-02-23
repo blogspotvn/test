@@ -13,19 +13,11 @@
         z-index: 9999;
         pointer-events: none;
     }
-
-    .darkMode .clicker {
-        background: #fff;
-    }
-
     .clicker.is-active {
         opacity: 0;
         transform: scale(1);
     }
 </style>
-
-<div class="clicker"></div>
-
 <script>
     document.addEventListener("mousedown", function(event) {
         var clicker = document.createElement("div");
