@@ -1,0 +1,43 @@
+<style>
+    .clicker {
+        width: 60px;
+        height: 60px;
+        margin-left: -30px;
+        margin-top: -30px;
+        background: #21ccc9;
+        border-radius: 100%;
+        position: absolute;
+        transform: scale(0);
+        opacity: .3;
+        transition: opacity 900ms ease, transform 900ms ease;
+        z-index: 9999;
+        pointer-events: none;
+    }
+
+    .darkMode .clicker {
+        background: #fff;
+    }
+
+    .clicker.is-active {
+        opacity: 0;
+        transform: scale(1);
+    }
+</style>
+
+<div class="clicker"></div>
+
+<script>
+    document.addEventListener("mousedown", function(event) {
+        var clicker = document.createElement("div");
+        clicker.classList.add("clicker");
+        clicker.style.left = event.clientX + "px";
+        clicker.style.top = event.clientY + "px";
+        document.body.appendChild(clicker);
+        setTimeout(function() {
+            clicker.classList.add("is-active");
+            setTimeout(function() {
+                clicker.remove();
+            }, 900);
+        }, 0);
+    });
+</script>
