@@ -1,35 +1,85 @@
-<style>
-    .clicker {
-        width: 60px;
-        height: 60px;
-        margin-left: -30px;
-        margin-top: -30px;
-        background: #21ccc9;
-        border-radius: 100%;
-        position: absolute;
-        transform: scale(0);
-        opacity: .3;
-        transition: opacity 900ms ease, transform 900ms ease;
-        z-index: 9999;
-        pointer-events: none;
-    }
-    .clicker.is-active {
-        opacity: 0;
-        transform: scale(1);
-    }
-</style>
-<script>
-    document.addEventListener("mousedown", function(event) {
-        var clicker = document.createElement("div");
-        clicker.classList.add("clicker");
-        clicker.style.left = event.clientX + "px";
-        clicker.style.top = event.clientY + "px";
-        document.body.appendChild(clicker);
-        setTimeout(function() {
-            clicker.classList.add("is-active");
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <title>Hiệu ứng click chuột gợn sóng</title>
+    <style>body {
+     background: #eee;
+     margin: 0;
+     padding: 0;
+     color: #333;
+     font: normal normal 13px Arial,sans-serif;
+     transition: .4s;
+}
+ h1 {
+     font-size: 20px;
+     line-height: 30px;
+}
+ .clicker {
+     width: 60px;
+     height: 60px;
+     margin-left: -30px;
+     margin-top: -30px;
+     background: #dd6666;
+     border-radius: 100%;
+     position: absolute;
+     transform: scale(0);
+     opacity: .3;
+     transition: opacity 900ms ease, transform 900ms ease;
+     z-index: 9999;
+     pointer-events: none;
+}
+ .clicker.is-active {
+     opacity: 0;
+     transform: scale(1);
+}
+ .copyright-container {
+     position: relative;
+     bottom: 0;
+     left: 0;
+     right: 0;
+     background-color: #ddd;
+     color: #333;
+     font-size: 15px;
+     text-align: center;
+     padding: 1px;
+}
+    </style>
+    <script>
+        document.addEventListener("mousedown", function(event) {
+            var clicker = document.createElement("div");
+            clicker.classList.add("clicker");
+            clicker.style.left = event.clientX + "px";
+            clicker.style.top = event.clientY + "px";
+            document.body.appendChild(clicker);
             setTimeout(function() {
-                clicker.remove();
-            }, 900);
-        }, 0);
-    });
-</script>
+                clicker.classList.add("is-active");
+                setTimeout(function() {
+                    clicker.remove();
+                }, 900);
+            }, 0);
+        });
+    </script>
+</head>
+
+<body>
+    <h1>Hiệu ứng click chuột gợn sóng</h1>
+    <div class="copyright-container">
+        <p class="text-center ">©
+            <span id='current-year'></span>
+            <script type='text/javascript'>
+                function getCurrentYear() {
+                var d = new Date();
+                return d.getFullYear();
+                }
+                el = document.getElementById('current-year');
+                el.innerHTML = getCurrentYear();
+            </script>
+            by
+            <a href="https://www.blogspotvn.net/ ">BlogspotVN.Net</a>
+        </p>
+    </div>
+</body>
+
+</html>
