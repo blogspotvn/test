@@ -1,0 +1,110 @@
+<div id='show-cat'></div><div id='show-post'></div>
+<script type='text/javaScript'>
+var cat_home = 'https://www.blogspotvn.net/';
+cat_numb = 5;
+cat_pre = 'Trang trước';
+cat_nex = 'Trang sau';
+var cat_name;
+var cat_start;
+var cat_class;
+function show_post2(a) {
+    var tt = a.feed.openSearch$totalResults.$t;
+    dw = '';
+    dw += '<div class="label-name"><h2>' + cat_name + '</h2></div>';
+    dw += '<ul>';
+    for (var i = 0; i < cat_numb && i < a.feed.entry.length; i++) {
+        var entry = a.feed.entry[i];
+        cat_title = entry.title.$t;
+        for (var j = 0; j < entry.link.length; j++) {
+            if (entry.link[j].rel == 'alternate') {
+                var cat_url = entry.link[j].href
+            }
+        }
+        dw += '<li>';
+        dw += (cat_start + i) + '. <a target="blank" href="' + cat_url + '" rel="nofollow">' + cat_title + '</a>';
+        dw += '</li>'
+    }
+    dw += '</ul>';
+    dw += '<div id="navi-cat">';
+    if (cat_start > 1) {
+        dw += '<a href="" onclick="show_post(\'' + cat_name + '\',\'' + (cat_start - cat_numb) + '\',\'' + cat_class + '\');return false">' + cat_pre + '</a>'
+    }
+    if ((cat_start + cat_numb - 1) < tt) {
+        dw += '<a href="" onclick="show_post(\'' + cat_name + '\',\'' + (cat_start + cat_numb) + '\',\'' + cat_class + '\');return false">' + cat_nex + '</a>'
+    }
+    dw += '<span>' + cat_start + ' &ndash; ' + (cat_start + i - 1) + ' / ' + tt + '</span>';
+    dw += '</div>';
+    document.getElementById('show-post').innerHTML = dw + '<style type="text/css">.cat-' + cat_class + ' a{background:#bbb!important;color:#fff!important}<\/style>'
+}
+
+function show_post(a, b, c) {
+    var d = document.getElementsByTagName('head')[0];
+    e = document.createElement('script');
+    e.type = 'text/javascript';
+    e.setAttribute('src', cat_home + '/feeds/posts/default/-/' + a + '?alt=json-in-script&start-index=' + b + '&max-results=' + cat_numb + '&callback=show_post2');
+    d.appendChild(e);
+    cat_name = a;
+    cat_start = parseInt(b), cat_class = c
+}
+
+function show_cat(a) {
+    var cat = a.feed.category;
+    var cat_remove = ['Blogspot', 'CSS']; 
+    var selected_label = "HTML"; 
+    var selected_label_index = -1;
+    var dw = '';
+    dw += '<ul>';
+    for (var i = 0; i < cat.length; i++) {
+        if (!cat_remove.includes(cat[i].term)) { 
+            dw += '<li class="cat-' + i + '">';
+            dw += '<a href="" onclick="show_post(\'' + cat[i].term + '\',\'1\',\'' + i + '\');return false">';
+            dw += cat[i].term;
+            dw += '</a>';
+            dw += '</li>';
+        }
+        if (cat[i].term === selected_label) {
+            selected_label_index = i; 
+        }
+    }
+    dw += '</ul>';
+    document.getElementById('show-cat').innerHTML = dw;
+    
+    if (selected_label_index !== -1) {
+        
+        show_post(selected_label, '1', selected_label_index);
+    }
+    else {
+       
+        show_post(cat[0].term, '1', '0');
+    }
+}
+document.write('<script type="text/javascript" src="' + cat_home + '/feeds/posts/default?alt=json-in-script&max-results=0&callback=show_cat"><\/script>');
+</script><br />
+<div style='clear:both'></div>
+<style type='text/css'>
+#show-cat{float:left;margin-right:2%;width:20%;height:377px;overflow-x:hidden;overflow-y:auto;line-height:18px}
+#show-cat ul{margin:0;border-top:1px solid #ccc;padding:0}
+#show-cat ul li{list-style-type:none;margin:0;border-right:1px solid #ccc;border-bottom:1px solid #ccc;border-left:1px solid #ccc;padding:0}
+#show-cat ul li a{display:block;padding:10px}
+#show-cat ul li a,#navi-cat a{background:#fff;color:#005b53;text-decoration:none}
+#show-cat ul li a,#navi-cat a,#navi-cat span{font-size:12px}
+#show-cat ul li a:hover,#navi-cat a:hover{background:#ccc;color:#fff}
+#show-post{float:left;width:78%}
+#show-post ul li{list-style-type:none}
+#navi-cat{padding:20px 0}
+#navi-cat a{margin-right:10px;border:1px solid #ccc}
+#navi-cat a,#navi-cat span{padding:5px 10px}
+#navi-cat span{float:right}
+#sidebar-wrapper,#navigation,#comments{display:none;}
+#main-wrapper{width: 100%;}
+.label-name h2{padding: 0;margin-top: 10px;}
+#show-cat::-webkit-scrollbar {background: #ddd;width: 5px;border-radius: 50px;}
+.dark #show-cat::-webkit-scrollbar {background: #000;}
+#show-cat::-webkit-scrollbar-thumb {background: #c1c1c1;border-radius: 50px;}
+.container li {line-height: 2em;}
+  @media screen and (max-width:1094px) {
+#show-cat,#show-post{width: 100%;height: auto;}
+#show-post{border-top: 5px solid #ddd;margin-top: 20px;}
+#show-cat ul li{float:left;}
+}
+</style>
